@@ -60,18 +60,43 @@ Pawelczyk et al [32] study in-context unlearning, where a language model is prov
 
 These techniques involve finetuning a base model to unlearn specific information.
 
-Gradient ascent ([2], [35], [38]) is one common approach to unlearning. Given a set of tokens from the “forget set”, a model is finetuned on the training objective to maximize the log-likelihood of the token sequences instead of minimizing it. In essence, this technique uses a negation of the standard training objective to degrade a model’s knowledge on a specific topic. The loss function looks like the following:
+**Gradient ascent** ([2], [35], [38]) is one common approach to unlearning. Given a set of tokens from the “forget set”, a model is finetuned on the training objective to maximize the log-likelihood of the token sequences instead of minimizing it. In essence, this technique uses a negation of the standard training objective to degrade a model’s knowledge on a specific topic. We want to maximize the following loss function:
 
-Negative preference optimization ([36]) was motivated by issues with catastrophic collapse in gradient ascent. This technique modifies the loss function from direct preference optimization ([37]) and omits the term corresponding to the positive response and only including the negative response. Instead of optimizing
+$$
+\mathcal{L}(f_{\theta},x) = - \sum_{t=1}^{T} \log p_{\theta}(x_t | x_{<t} ) $$
 
-(the standard DPO loss), they instead optimize
- .  NPO appears to have better theoretical guarantees of divergence speed and avoid catastrophic collapse during empirical evaluation compared with gradient ascent.
+where $$x$$ is a sequence of tokens from the forget set, $$T$$ is the length of the sequence, and $$\theta$$ are the model parameters.
 
-Representation Misdirection for Unlearning (RMU) ([3]) attempts to simultaneously preserve a model’s representations on the retain dataset while degrading the model’s representations on the unlearning dataset. This technique uses the following loss function and optimizes only on a few layers:
-Forget loss,
-Retain loss: ,
+**Negative preference optimization** ([36]) was motivated by issues with catastrophic collapse in gradient ascent. This technique modifies the loss function from direct preference optimization ([37]). The standard DPO loss is:
+
+$$\mathcal{L}_{DPO}(\theta) = -\frac{2}{\beta} \mathbb{E}_{\mathcal{D} } \Big[ \log \sigma \Big(\beta \log \frac{\pi_{\theta}(y_w|x)}{\pi_{ref}(y_w|x)} - \beta \log \frac{\pi_{\theta}(y_l|x)}{\pi_{ref}(y_l|x)} \Big)  \Big]$$
+
+Here, $$\mathcal{D}$$ is a preference dataset containing $$\{(x_i, y_{i,w}, y_{i,l})\}_{i \in [n]}$$ where $$x_i$$ is a prompt, $$y_{i,w}$$ is the preferred response, and $$y_{i,l}$$ is the rejected response. $$\pi_{\theta}$$ is the distribution of the model being trained, $$\pi_{ref}$$ is the distribution of the reference model, $$\sigma$$ is the sigmoid function, and $$\beta$$ is an inverse temperature parameter. NPO modifies this to instead minimize the following loss:
+
+$$\mathcal{L}_{NPO}(\theta) = -\frac{2}{\beta} \mathbb{E}_{\mathcal{D} } \Big[\log \sigma \Big( - \beta \log \frac{\pi_{\theta}(y_l|x)}{\pi_{ref}(y_l|x)} \Big)  \Big]$$
+
+where the terms involving the preferred response $$y_{w}$$ are omitted. The intuition is that the model should "unlearn" the response $$y_{l}$$ even if no preferred response is provided. NPO appears to have better theoretical guarantees of divergence speed and avoid catastrophic collapse during empirical evaluation compared with gradient ascent.
+
+**Representation Misdirection for Unlearning (RMU)** ([3]) attempts to simultaneously preserve a model’s representations on the retain dataset while degrading the model’s representations on the unlearning dataset. This technique uses the following loss function and optimizes only on a few layers:
+Forget loss:
+
+$$\mathcal{L}_{\text{forget} } = \mathbb{E}_{x_f \sim D_{\text{forget} }} \Big[ \frac{1}{L_f} \sum_{\text{token } t \in x_f} || M_{\text{updated} }(t) - c \cdot u ||_2^2\Big] $$
+
+Retain loss:
+
+$$\mathcal{L}_{\text{retain} } = \mathbb{E}_{x_f \sim D_{\text{retain} }} \Big[ \frac{1}{L_f} \sum_{\text{token } t \in x_f} || M_{\text{updated} }(t) - M_{\text{frozen} }(t) ||_2^2\Big] $$
+
 Full loss:
- is the number of tokens in ,  is the set of hidden states of the unlearned model at some layer ,  is the corresponding set of hidden states of the original, frozen model at that same layer ,  is a random unit vector.
+
+$$\mathcal{L} = \mathcal{L}_{\text{forget} } + \alpha \mathcal{L}_{\text{forget}} $$
+
+- $$L_f$$ is the number of tokens in $$x_f$$
+- $$D_{\text{forget} }$$ is the dataset of forget examples
+- $$D_{\text{retain} }$$ is the dataset of retain examples
+- $$M_{\text{updated} }$$ is the set of hidden states of the unlearned model at some layer $$\ell$$
+- $$M_{\text{frozen} }$$ is the corresponding set of hidden states of the original frozen model at that same layer $$\ell$$
+- $$u$$ is a random unit vector.
+- $$c, \alpha$$ are hyperparameters.
 
 ### Model edits/lesions
 
@@ -91,7 +116,7 @@ Evaluating model performance on non-targets often looks similar to standard LLM 
 
 The gold standard for LLM unlearning is to retrain the model from scratch without the offending data. In theory, we would expect any successful unlearning technique should result in an unlearned model that is as indistinguishable as possible from a retrained model. (In practice of course, such an evaluation effort would likely be infeasible due to the cost of retraining a model.)
 
-However, note that when the goal of unlearning is to remove harmful capabilities, there will likely be dual-use knowledge that is useful for both benign use cases (and therefore important for model performance on non-targets) yet can contribute to harmful capabilities [5]. Such cases might not have a clear `gold standard`.
+However, note that when the goal of unlearning is to remove harmful capabilities, there will likely be dual-use knowledge that is useful for both benign use cases (and therefore important for model performance on non-targets) yet can contribute to harmful capabilities [5]. Such cases might not have a clear "gold standard".
 
 ### Benchmarks
 
