@@ -27,26 +27,26 @@ One formulation of the LLM unlearning problem might be as follows (suggested by 
 
 ## Strategies for Unlearning
 
-Retraining from scratch
-Input/output methods
-Finetuning based approaches
-Gradient ascent
-NPO
-Latent adversarial training
-Degrading representations (?)
-Adversarial training?
-Influence functions (?)
-Problems with finetuning strategies for unlearning
-Model edits/lesions
-Other mechanistic tricks
-Localization-informed unlearning
-Linearity-based approaches
-Misc
-Gradient routing
-Architecture modification?
-RAG-based approaches?
-Compression/distillation
-Metalearning?
+- Retraining from scratch
+- Input/output methods
+- Finetuning based approaches
+  - Gradient ascent
+    - NPO
+  - Latent adversarial training
+  - Degrading representations (?)
+  - Adversarial training?
+  - Influence functions (?)
+  - Problems with finetuning strategies for unlearning
+- Model edits/lesions
+  - Other mechanistic tricks
+  - Localization-informed unlearning
+  - Linearity-based approaches
+- Misc
+  - Gradient routing
+  - Architecture modification?
+  - RAG-based approaches?
+  - Compression/distillation
+  - Metalearning?
 
 The gold-standard technique for unlearning is retraining the original model on the retain set. While this generally isn’t a feasible solution given the costs of retraining, a model trained from scratch can be a useful benchmark to evaluate approximate unlearning techniques.
 
@@ -144,7 +144,7 @@ Successful unlearning methods should be robust to a wide variety of attacks to b
 
 #### Input/output Attacks
 
-Rephrasing the original prompt: This might be the simplest form of “attack” where a model is queried many times with slightly different prompts. Sometimes, this attack can be an effective demonstration that an unlearning method is not robust ([24]).
+Rephrasing the original prompt: This might be the simplest form of “attack” where a model is queried many times with slightly different prompts. Sometimes, this attack can be an effective demonstration that an unlearning method is not robust ([24], [39]).
 A variation of this might change the type of questions an unlearned model is queried with. For example, if a technique attempts to unlearn text-generation abilities for some unlearning target, the evaluation might test the model’s ability to answer multiple choice questions about the topic.
 
 General jailbreaks: There are a number of papers demonstrating that language models, even with significant effort put into safety finetuning and red teaming, can still be jailbroken to produce objectionable content to arbitrary prompts ([11], [12]). Such jailbreaks can also be used to retrieve “unlearned” knowledge from a model.
@@ -159,7 +159,7 @@ Challenging forget-set queries: When evaluating unlearned models, it is useful t
 
 Finetuning can remove safety training: If fine-tuning access to a model is given, one primary risk comes from finetuning being used to undo safety-training ([17],[18],[19], [22]). For example, Lermen et al. [19] demonstrate that LoRA finetuning can efficiently undo safety training for Llama 2 and Mistral models while retaining general performance. Note that there is a line of work developing tamper-resistant safeguards to prevent these sorts of fine-tuning attacks ([23]).
 
-Relearning via fine-tuning: The analogous risk for unlearning methods is knowledge relearning ([8], [20], [21]), where finetuning an unlearned model on a some knowledge that was unlearned leads to a model relearning significantly more unlearned knowledge.
+Relearning via fine-tuning: The analogous risk for unlearning methods is knowledge relearning ([8], [20], [21]), where finetuning an unlearned model on a some knowledge that was unlearned leads to a model relearning significantly more unlearned knowledge. In certain cases, unlearned knowledge can be relearned by finetuning on a benign dataset ([39]).
 
 #### Whitebox access attacks
 
@@ -223,3 +223,4 @@ While unlearning for large language models is a relatively young field, machine 
 - [36]: Zhang, Ruiqi, Licong Lin, Yu Bai, and Song Mei. "Negative preference optimization: From catastrophic collapse to effective unlearning." arXiv preprint arXiv:2404.05868 (2024).
 - [37]: Rafailov, Rafael, Archit Sharma, Eric Mitchell, Christopher D. Manning, Stefano Ermon, and Chelsea Finn. "Direct preference optimization: Your language model is secretly a reward model." Advances in Neural Information Processing Systems 36 (2023): 53728-53741.
 - [38]: Yao, Yuanshun, Xiaojun Xu, and Yang Liu. "Large language model unlearning." arXiv preprint arXiv:2310.10683 (2023).
+- [39]: Doshi, Jai, and Asa Cooper Stickland. "Does unlearning truly unlearn? a black box evaluation of llm unlearning methods." arXiv preprint arXiv:2411.12103 (2024).
