@@ -98,6 +98,8 @@ $$\mathcal{L} = \mathcal{L}_{\text{forget} } + \alpha \mathcal{L}_{\text{forget}
 - $$u$$ is a random unit vector.
 - $$c, \alpha$$ are hyperparameters.
 
+**Latent Adversarial Training (LAT)** ([40], [41]) is a variation of adversarial training that performs perturbations on hidden activations of a model instead of the input. In [41], the authors used LAT to augment existing unlearning methods including the "Who's Harry Potter" method ([4]), gradient ascent ([35]), and RMU ([3]). For example, in the case of RMU, the authors learned adversarial perturbations for the hidden states only when training on the forget set. These adversarial perturbations were then used to modify the forward pass of the model when computing the forget loss.
+
 ### Model edits/lesions
 
 ### Misc
@@ -224,3 +226,5 @@ While unlearning for large language models is a relatively young field, machine 
 - [37]: Rafailov, Rafael, Archit Sharma, Eric Mitchell, Christopher D. Manning, Stefano Ermon, and Chelsea Finn. "Direct preference optimization: Your language model is secretly a reward model." Advances in Neural Information Processing Systems 36 (2023): 53728-53741.
 - [38]: Yao, Yuanshun, Xiaojun Xu, and Yang Liu. "Large language model unlearning." arXiv preprint arXiv:2310.10683 (2023).
 - [39]: Doshi, Jai, and Asa Cooper Stickland. "Does unlearning truly unlearn? a black box evaluation of llm unlearning methods." arXiv preprint arXiv:2411.12103 (2024).
+- [40]: Sheshadri, Abhay, Aidan Ewart, Phillip Guo, Aengus Lynch, Cindy Wu, Vivek Hebbar, Henry Sleight et al. "Latent adversarial training improves robustness to persistent harmful behaviors in llms." arXiv preprint arXiv:2407.15549 (2024).
+- [41]: Casper, Stephen, Lennart Schulze, Oam Patel, and Dylan Hadfield-Menell. "Defending against unforeseen failure modes with latent adversarial training." arXiv preprint arXiv:2403.05030 (2024).
