@@ -6,7 +6,7 @@ last_modified_at: 2025-04-13 14:13:17 -0800
 categories: math
 ---
 
-I am currently working through the textbook *Measure, Integration, and Real Analysis* by Sheldon Axler. Think of this post as a collection of highlights of key ideas, lemmas, theorems, etc. that I have found interesting so far. This post will be relatively technical, but I will try to explain the intuition and motivation for the results.
+I am currently working through the textbook *Measure, Integration, and Real Analysis* by Sheldon Axler. Think of this post as a collection of highlights of key ideas, lemmas, theorems, etc. that I have found interesting so far. These notes are not comprehensive: there will likely be many important intermediate results that I have not included. This post will be relatively technical, but I will try to explain the intuition and motivation for the results.
 
 I assume familiarity with basic concepts in real analysis including pointwise versus uniform convergence, uniform continuity, and the Riemann integral.
 
@@ -57,3 +57,31 @@ $$f_n(x) = \begin{cases} 1 & x = q_1, q_2, \ldots, q_n \\ 0 & \text{otherwise} \
 Each $$f_n$$ is Riemann integrable, and $$\lim_{n \to \infty} f_n(x) = 0$$ for all $$x \in [0,1]$$. However, $$f_n \to f$$ pointwise, where $$f(x) = \begin{cases} 1 & x \in \mathbb{Q} \\ 0 & x \in \mathbb{R} \setminus \mathbb{Q} \end{cases}$$, which we showed above is not Riemann integrable.
 
 These three weaknesses motivate a different approach to integration.
+
+## Chapter 2: Measures
+
+This chapter introduces the notion of a measure, which generalizes the notion of length (area, volume, etc) to a larger class of sets in $$\mathbb{R}^n$$. One motivation for this construction is that it allows us to formalize integration with respect to a measure. We use this to define the Lebesgue integral, an improvement over the Riemann integral.
+
+### Formalizing the notion of measure
+
+We define $$\ell(I)$$ to be the length of an interval $$I$$. So $$\ell((a,b)) = b-a$$.
+
+There are a few desirable properties that we might like a measure $$\mu$$ on $$\mathbb{R}$$ to have:
+
+1. $$\mu$$ is a function from the set of all subsets of $$\mathbb{R}$$ to $$[0, \infty]$$
+   - Intuitively, if we measure the length of a set, we should get a non-negative real number. We want this property to be true for measures as well.
+2. $$\mu(I) = \ell(I)$$ for every open interval $$I$$ of $$\mathbb{R}$$.
+   - We want the measure to agree with length for any set that such a length is defined for.
+3. $$\mu\left(\bigcup_{k=1}^\infty A_k\right) = \sum_{k=1}^\infty \mu(A_k)$$ for every disjoint sequence $$A_1, A_2, \ldots$$ of subsets of $$\mathbb{R}$$.
+   - If we partition a set into smaller pieces, the measure of the whole set should be the sum of the measures of the pieces.
+4. $$\mu(t + A) = \mu(A)$$ for every $$A \subseteq \mathbb{R}$$ and every $$t \in \mathbb{R}$$.
+   - Moving a set should not change its measure.
+
+Surprisingly, there is no measure on $$\mathbb{R}$$ that satisfies all of these properties. (For a full proof, see theorem 2.22 in the textbook. The standard counterexample is the Vitali set.)
+
+It seems like we must relax some of these properties. In practice, we usually relax property (1): instead of requiring that $$\mu$$ is defined for **all** subsets of $$\mathbb{R}$$, we only require that $$\mu$$ is defined for **some** collection of subsets of $$\mathbb{R}$$ (the measurable sets with respect to $$\mu$$).
+In practice, we can choose this collection of subsets (i.e. a $$\sigma$$-algebra) such that nearly all "important" sets that we care about are measurable.
+
+As it turns out, the way we construct such a measure is to first define the "outer measure" of a set, which is a function that satisfies properties (1), (2), and (4) above. We then restrict the domain of this function to the collection of measurable sets and show that this restricted function (which no longer satisfies property (1)) does satisfy property (2), (3), and (4).
+
+### Cantor set and Cantor function
