@@ -85,3 +85,15 @@ In practice, we can choose this collection of subsets (i.e. a $$\sigma$$-algebra
 As it turns out, the way we construct such a measure is to first define the "outer measure" of a set, which is a function that satisfies properties (1), (2), and (4) above. We then restrict the domain of this function to the collection of measurable sets and show that this restricted function (which no longer satisfies property (1)) does satisfy property (2), (3), and (4).
 
 ### Cantor set and Cantor function
+
+The Cantor set is a standard counterexample in measure theory as an uncountable set with measure 0. The Cantor set is constructed by starting with the interval $$[0,1]$$. At each step, we remove the middle third of each interval in the previous step. After infinitely many steps, we are left with the Cantor set.
+
+For example, let $$C_k$$ be the $$k$$th step in the construction of the Cantor set with $$C_0 = [0,1]$$. Then $$C_1 = [0, 1/3] \cup [2/3, 1]$$, $$C_2 = [0, 1/9] \cup [2/9, 1/3] \cup [2/3, 7/9] \cup [8/9, 1]$$, and so on.
+
+<!-- TODO: add an image of the Cantor set -->
+
+More precisely, $$C_0 := [0,1]$$, and $$G_k :=\Big( \bigcup_{i=0}^{3^{k-1}-1} (\frac{3i + 1}{3^k},\frac{3i + 2}{3^k}) \Big)$$, where $$G_k$$ is the union of the middle thirds of the intervals of length $$\frac{1}{3^k}$$ that are to be removed. Then the Cantor set is given by $$ C := C_0 \setminus \bigcup_{k=1}^\infty G_k$$.
+
+Notice that $$ \lvert \bigcup_{k=1}^{n} G_k \rvert = \frac{1}{3} + \frac{2}{3^2} + \cdots + \frac{2^{n-1}}{3^n} = 1 - \frac{2^n}{3^n}$$. As $$n \to \infty$$, this converges to 1. We know that $$C_0 = [0,1]$$ has measure 1, so $$\lvert C \rvert = \lvert C_0 \setminus \bigcup_{k=1}^{\infty} G_k \rvert = \lim_{n \to \infty} \lvert C_0 \setminus \bigcup_{k=1}^{n} G_k \rvert  = \lim_{n \to \infty} (1 - (1- \frac{2^{n}}{3^n})) = 0$$. So the Cantor set has measure 0.
+
+The Cantor set is also an uncountable set. One way to see this is to consider base 3 representations of numbers. Every number in $$[0,1]$$ can be represented as a base 3 decimal. The numbers in the Cantor set are those numbers that do not have a 1 in their base 3 decimal expansion. Such a set can be shown to be uncountable using a Cantor diagonalization argument.
