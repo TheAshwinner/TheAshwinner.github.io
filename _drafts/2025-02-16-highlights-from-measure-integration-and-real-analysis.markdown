@@ -38,11 +38,19 @@ This common value is called the Riemann integral of $$f$$ over $$[a, b]$$ and is
 
 There are a few weaknesses with the Riemann integral that motivate the need for a more powerful integration theory.
 
+{% include custom-box.html
+   type="theorem"
+   header="Weaknesses of Riemann integration"
+   content="
+
 1. Riemann integration does not handle functions with many discontinuities well.
 
 2. Riemann integration does not handle unbounded functions well.
 
 3. Riemann integration does not play well with limits of sequences of functions.
+
+   "
+%}
 
 For (1), consider the function $$f(x) = \begin{cases} 1 & x \in \mathbb{Q} \\ 0 & x \in \mathbb{R} \setminus \mathbb{Q} \end{cases}$$
 
@@ -68,6 +76,11 @@ We define $$\ell(I)$$ to be the length of an interval $$I$$. So $$\ell((a,b)) = 
 
 There are a few desirable properties that we might like a measure $$\mu$$ on $$\mathbb{R}$$ to have:
 
+{% include custom-box.html
+   type="theorem"
+   header="Desiderata for a measure"
+   content="
+
 1. $$\mu$$ is a function from the set of all subsets of $$\mathbb{R}$$ to $$[0, \infty]$$
    - Intuitively, if we measure the length of a set, we should get a non-negative real number. We want this property to be true for measures as well.
 2. $$\mu(I) = \ell(I)$$ for every open interval $$I$$ of $$\mathbb{R}$$.
@@ -76,6 +89,9 @@ There are a few desirable properties that we might like a measure $$\mu$$ on $$\
    - If we partition a set into smaller pieces, the measure of the whole set should be the sum of the measures of the pieces.
 4. $$\mu(t + A) = \mu(A)$$ for every $$A \subseteq \mathbb{R}$$ and every $$t \in \mathbb{R}$$.
    - Moving a set should not change its measure.
+
+   "
+%}
 
 Surprisingly, there is no measure on $$\mathbb{R}$$ that satisfies all of these properties. (For a full proof, see theorem 2.22 in the textbook. The standard counterexample is the Vitali set.)
 
@@ -92,7 +108,17 @@ For example, let $$C_k$$ be the $$k$$th step in the construction of the Cantor s
 
 <!-- TODO: add an image of the Cantor set -->
 
-More precisely, $$C_0 := [0,1]$$, and $$G_k :=\Big( \bigcup_{i=0}^{3^{k-1}-1} (\frac{3i + 1}{3^k},\frac{3i + 2}{3^k}) \Big)$$, where $$G_k$$ is the union of the middle thirds of the intervals of length $$\frac{1}{3^k}$$ that are to be removed. Then the Cantor set is given by $$ C := C_0 \setminus \bigcup_{k=1}^\infty G_k$$.
+{% include custom-box.html
+   type="theorem"
+   header="Definition of the Cantor set"
+   content="
+Let $$C_0 := [0,1]$$, and $$G_k :=\Big( \bigcup_{i=0}^{3^{k-1}-1} (\frac{3i + 1}{3^k},\frac{3i + 2}{3^k}) \Big)$$.
+
+Then the Cantor set is given by $$ C := C_0 \setminus \bigcup_{k=1}^\infty G_k$$
+   "
+%}
+
+Note that $$G_k$$ is the union of the middle thirds of the intervals of length $$\frac{1}{3^k}$$. Each $$G_k$$ should be removed from $$C_0$$ to produce the Cantor set.
 
 Notice that $$ \lvert \bigcup_{k=1}^{n} G_k \rvert = \frac{1}{3} + \frac{2}{3^2} + \cdots + \frac{2^{n-1}}{3^n} = 1 - \frac{2^n}{3^n}$$. As $$n \to \infty$$, this converges to 1. We know that $$C_0 = [0,1]$$ has measure 1, so $$\lvert C \rvert = \lvert C_0 \setminus \bigcup_{k=1}^{\infty} G_k \rvert = \lim_{n \to \infty} \lvert C_0 \setminus \bigcup_{k=1}^{n} G_k \rvert  = \lim_{n \to \infty} (1 - (1- \frac{2^{n}}{3^n})) = 0$$. So the Cantor set has measure 0.
 

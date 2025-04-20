@@ -1,0 +1,8 @@
+<div class="custom-box {{ include.type | default: 'info' }}">
+  <div class="custom-box-header">
+    {{ include.header | default: "Note" }}
+  </div>
+  <div class="custom-box-body">
+    {{ include.content | markdownify }}
+  </div>
+</div>

@@ -1,0 +1,49 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@charset "utf-8";
+
+// Import the base styles from the theme first
+// Adjust the path if your theme is different, but for minima this is correct.
+@import "minima"; 
+
+//
+// Now, add your custom CSS rules below.
+//
+
+/* Custom Box Styling */
+.custom-box {
+  border: 1px solid #adb5bd; /* Light grey border */
+  border-radius: 8px;       /* Rounded corners */
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  overflow: hidden; /* Ensures border-radius clips inner elements */
+  background-color: #f8f9fa; /* Light background for the whole box */
+}
+
+.custom-box-header {
+  background-color: #cfe2ff; /* Light blue background for header */
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #adb5bd; /* Separator line */
+  font-weight: bold;
+}
+
+.custom-box-body {
+  padding: 1rem;
+  /* Background for body can be inherited or set explicitly */
+  /* background-color: #eef5ff; */ /* Example: Lighter blue background */
+}
+
+/* Optional: Specific styling if you use type="theorem" */
+.custom-box.theorem .custom-box-header {
+   /* Keep the default blue or change it */
+   /* background-color: #d1e7dd; */ /* Example: Light green */
+}
+
+.custom-box.theorem .custom-box-body {
+   /* Keep the default body background or change it */
+   /* background-color: #e9f7ef; */ /* Example: Lighter green */
+}
+
+// You can add other custom styles here too.
