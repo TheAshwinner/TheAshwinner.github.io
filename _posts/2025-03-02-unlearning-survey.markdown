@@ -5,7 +5,7 @@ date:   2025-03-02 14:13:17 -0800
 categories: math
 ---
 
-_Status: Draft_
+Status: Unfinished Draft (it's unlikely I'll be updating this so I'm sharing this in case it is useful for people)
 
 ## Motivation
 
