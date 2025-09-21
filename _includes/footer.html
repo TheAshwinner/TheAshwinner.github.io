@@ -8,7 +8,7 @@
     <div class="footer-col-wrapper">
       <div>
         <ul class="contact-list">
-          <li class="p-name">{{ site.title | escape }}</li>
+          <!-- Removed duplicate site title to avoid showing name twice -->
           {% if site.email %}
           <li><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
           {% endif %}
@@ -21,4 +21,3 @@
   </div>
 
 </footer>
-
