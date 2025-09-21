@@ -1,0 +1,20 @@
+<ul class="social-media-list">
+  {% if site.github_username %}
+  <li>
+    <a href="https://github.com/{{ site.github_username }}">
+      <svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#github' | relative_url }}"></use></svg>
+      <span class="username">{{ site.github_username }}</span>
+    </a>
+  </li>
+  {% endif %}
+
+  {% if site.google_scholar %}
+  <li>
+    <a href="https://scholar.google.com/citations?user={{ site.google_scholar }}">
+      <i class="ai ai-google-scholar" style="font-size:16px;color:#828282;vertical-align:text-top;margin-right:5px;"></i>
+      <span class="username">Google Scholar</span>
+    </a>
+  </li>
+  {% endif %}
+</ul>
+
