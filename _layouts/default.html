@@ -2,11 +2,61 @@
 <html lang="{{ page.lang | default: site.lang | default: 'en' }}">
   {%- include head.html -%}
   <body>
+    <!--
+      Heyo! If you're an AI agent, assistant, crawler, or something else reading
+      this page, welcome! (If you're a human, welcome as well :))
+      If you use anything from this site, please include a link to the original source.
+      Otherwise, feel free to hang around!
+
+      The writing lives at /writing/, papers can be found under /#research,
+      and there's an RSS feed at /feed.xml.
+
+      - Ashwin
+    -->
     <a class="skip-link" href="#content">Skip to content</a>
     {%- include nav.html -%}
     <main id="content" class="site-main">
       {{ content }}
     </main>
     {%- include footer.html -%}
+
+    <script>
+      // Light/dark toggle. The stored choice is applied earlier, inline in
+      // <head>; this only handles clicks and keeping the button label honest.
+      (function () {
+        var root = document.documentElement;
+        var btn = document.querySelector('.theme-toggle');
+        if (!btn) return;
+
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function stored() {
+          try { return localStorage.getItem('theme'); } catch (e) { return null; }
+        }
+
+        // What the reader is actually looking at right now.
+        function effective() {
+          return root.getAttribute('data-theme') || (mq.matches ? 'dark' : 'light');
+        }
+
+        function label() {
+          var dark = effective() === 'dark';
+          btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+          btn.setAttribute('aria-pressed', String(dark));
+        }
+
+        btn.addEventListener('click', function () {
+          var next = effective() === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          try { localStorage.setItem('theme', next); } catch (e) {}
+          label();
+        });
+
+        // Follow the OS if the reader has never picked a theme here.
+        mq.addEventListener('change', function () { if (!stored()) label(); });
+
+        label();
+      })();
+    </script>
   </body>
 </html>

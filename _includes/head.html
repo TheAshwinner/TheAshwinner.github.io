@@ -3,6 +3,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  {%- comment -%}
+  Runs before first paint so a stored theme choice never flashes the wrong
+  palette. Must stay inline and stay above the stylesheet.
+  {%- endcomment -%}
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) { /* private mode, blocked storage - fall back to the OS */ }
+    })();
+  </script>
+
   {%- seo -%}
   {%- feed_meta -%}
 

@@ -27,6 +27,13 @@
   &:hover { color: var(--accent); border-bottom-color: transparent; }
 }
 
+.site-nav__right {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem 1.1rem;
+  flex-wrap: wrap;
+}
+
 .site-nav__links {
   list-style: none;
   margin: 0;
@@ -43,6 +50,45 @@
     &[aria-current="page"] { color: var(--text); }
   }
 }
+
+/* Theme toggle */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.12s ease, border-color 0.12s ease, background-color 0.12s ease;
+
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--surface);
+  }
+}
+
+.theme-toggle__icon { display: block; }
+
+// Show the icon for the theme a click would switch TO.
+.theme-toggle__sun { display: none; }
+
+@mixin toggle-icons-dark {
+  .theme-toggle__moon { display: none; }
+  .theme-toggle__sun { display: block; }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { @include toggle-icons-dark; }
+}
+
+:root[data-theme="dark"] { @include toggle-icons-dark; }
 
 /* Link row — hero, footer, and publication links all share this */
 
@@ -78,7 +124,7 @@
 }
 
 .site-footer__meta {
-  margin: 1rem 0 0;
+  margin: 0;
   font-size: 0.875rem;
   color: var(--faint);
 
