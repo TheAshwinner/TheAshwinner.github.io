@@ -3,7 +3,6 @@ layout: post
 title:  "Highlights from Measure, Integration, and Real Analysis"
 date:   2025-02-17 14:13:17 -0800
 last_modified_at: 2025-04-13 14:13:17 -0800
-categories: math
 ---
 
 I am currently working through the textbook *Measure, Integration, and Real Analysis* by Sheldon Axler. Think of this post as a collection of highlights of key ideas, lemmas, theorems, etc. that I have found interesting so far. These notes are not comprehensive: there will likely be many important intermediate results that I have not included. This post will be relatively technical, but I will try to explain the intuition and motivation for the results.

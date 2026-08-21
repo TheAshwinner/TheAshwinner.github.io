@@ -1,23 +1,7 @@
-<footer class="site-footer h-card">
-  <data class="u-url" href="{{ '/' | relative_url }}"></data>
-
-  <div class="wrapper">
-    <h2 class="footer-heading">{{ site.title | escape }}</h2>
-
-    <!-- Single-column, vertical footer content -->
-    <div class="footer-col-wrapper">
-      <div>
-        <ul class="contact-list">
-          <!-- Removed duplicate site title to avoid showing name twice -->
-          {% if site.email %}
-          <li><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-          {% endif %}
-        </ul>
-
-        {% include social.html %}
-      </div>
-    </div>
-
-  </div>
-
+<footer class="site-footer">
+  {% include link-row.html %}
+  <p class="site-footer__meta">
+    &copy; {{ 'now' | date: "%Y" }} {{ site.title }}
+    &middot; <a href="{{ '/feed.xml' | relative_url }}">rss</a>
+  </p>
 </footer>

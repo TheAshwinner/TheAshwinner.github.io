@@ -1,0 +1,26 @@
+// Rouge syntax highlighting, theme-aware.
+
+.highlight {
+  .c, .cm, .c1, .cs, .cd { color: var(--faint); font-style: italic; }
+  .k, .kc, .kd, .kn, .kp, .kr, .kt { color: #a626a4; font-weight: 600; }
+  .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr { color: #50a14f; }
+  .m, .mf, .mh, .mi, .mo, .il { color: #986801; }
+  .nf, .nc, .nn { color: #4078f2; }
+  .nb, .bp { color: #0184bc; }
+  .o, .ow { color: var(--text); }
+  .err { color: #e45649; }
+  .gd { color: #e45649; }
+  .gi { color: #50a14f; }
+}
+
+@media (prefers-color-scheme: dark) {
+  .highlight {
+    .k, .kc, .kd, .kn, .kp, .kr, .kt { color: #c678dd; }
+    .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr { color: #98c379; }
+    .m, .mf, .mh, .mi, .mo, .il { color: #d19a66; }
+    .nf, .nc, .nn { color: #61afef; }
+    .nb, .bp { color: #56b6c2; }
+    .err, .gd { color: #e06c75; }
+    .gi { color: #98c379; }
+  }
+}

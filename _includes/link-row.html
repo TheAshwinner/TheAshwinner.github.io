@@ -1,0 +1,16 @@
+{%- comment -%}
+Renders site.data.links as a row of lowercase text links.
+An entry with `email: true` becomes a mailto: built from site.email_address,
+so the address is never rendered as page text.
+{%- endcomment -%}
+<ul class="link-row">
+  {%- for link in site.data.links -%}
+    {%- if link.email -%}
+      {%- if site.email_address -%}
+      <li><a href="mailto:{{ site.email_address }}">{{ site.email_label | default: 'email' }}</a></li>
+      {%- endif -%}
+    {%- elsif link.url -%}
+      <li><a href="{{ link.url }}"{% unless link.url contains site.url or link.url == '/' %} target="_blank" rel="noopener"{% endunless %}>{{ link.name }}</a></li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>

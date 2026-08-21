@@ -2,35 +2,29 @@
 layout: default
 ---
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <p class="post__back"><a href="{{ '/writing/' | relative_url }}">&larr; writing</a></p>
 
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
-    <p class="post-meta">
+  <header class="post__header">
+    <h1 class="post__title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <p class="post__meta">
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-        {{ page.date | date: date_format }}
+        {{ page.date | date: "%B %-d, %Y" }}
       </time>
-      {%- if page.author -%}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
-      {%- endif -%}
-
-      {% if page.last_modified_at %}
-        <br>
-        <span>Last updated: </span>
-        <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">
-          {{ page.last_modified_at | date: date_format }}
-        </time>
-      {% endif %}
+      {%- if page.author %}
+      &middot; <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+      {%- endif %}
+      {%- if page.last_modified_at %}
+      <br>
+      <span class="post__updated">Last updated
+        <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">{{ page.last_modified_at | date: "%B %-d, %Y" }}</time>
+      </span>
+      {%- endif %}
     </p>
   </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
+  <div class="post__content e-content prose" itemprop="articleBody">
     {{ content }}
   </div>
-
-  {%- if site.disqus.shortname -%}
-    {%- include disqus_comments.html -%}
-  {%- endif -%}
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>

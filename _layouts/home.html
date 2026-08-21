@@ -1,0 +1,66 @@
+---
+layout: default
+---
+<header class="hero">
+  {%- if site.headshot %}
+  <img class="hero__photo"
+       src="{{ site.headshot | relative_url }}"
+       alt="{{ site.title }}"
+       width="148" height="148">
+  {%- endif %}
+  <h1 class="hero__name">{{ site.title }}</h1>
+  {%- if site.tagline %}<p class="hero__tagline">{{ site.tagline }}</p>{% endif %}
+  {% include link-row.html %}
+</header>
+
+<section class="section" id="about">
+  <h2 class="section__heading">about</h2>
+  <div class="prose">
+    {{ content }}
+  </div>
+</section>
+
+{%- if site.data.publications and site.data.publications.size > 0 %}
+<section class="section" id="research">
+  <h2 class="section__heading">research</h2>
+  <ul class="pub-list">
+    {%- for pub in site.data.publications -%}
+      {% include publication.html pub=pub %}
+    {%- endfor -%}
+  </ul>
+  {%- comment -%}Only show the footnote if some author list actually uses an asterisk.{%- endcomment -%}
+  {%- assign starred = false -%}
+  {%- for pub in site.data.publications -%}
+    {%- if pub.authors contains '*' -%}{%- assign starred = true -%}{%- endif -%}
+  {%- endfor -%}
+  {%- if starred %}
+  <p class="pub-list__note">* denotes equal contribution</p>
+  {%- endif %}
+</section>
+{%- endif %}
+
+{%- if site.show_news and site.data.news and site.data.news.size > 0 %}
+<section class="section" id="news">
+  <h2 class="section__heading">news</h2>
+  {%- if site.news_limit -%}
+    {%- assign news_items = site.data.news | slice: 0, site.news_limit -%}
+  {%- else -%}
+    {%- assign news_items = site.data.news -%}
+  {%- endif -%}
+  <ul class="news-list">
+    {%- for item in news_items %}
+    <li class="news">
+      <time class="news__date" datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%b %Y" }}</time>
+      <span class="news__body">
+        {%- if item.kind %}<span class="news__kind news__kind--{{ item.kind }}">{{ item.kind }}</span> {% endif -%}
+        {%- if item.url -%}
+          <a href="{{ item.url | relative_url }}">{{ item.text }}</a>
+        {%- else -%}
+          {{ item.text }}
+        {%- endif -%}
+      </span>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}

@@ -1,0 +1,39 @@
+{%- comment -%} Renders one entry from _data/publications.yml {%- endcomment -%}
+<li class="pub{% if include.pub.thumbnail %} pub--with-thumb{% endif %}">
+  {%- if include.pub.thumbnail %}
+  <div class="pub__thumb">
+    <img src="{{ include.pub.thumbnail | relative_url }}" alt="" loading="lazy">
+  </div>
+  {%- endif %}
+  <div class="pub__body">
+    <h3 class="pub__title">
+      {%- if include.pub.featured %}<span class="pub__star" title="Featured">&#9733;</span> {% endif -%}
+      {{ include.pub.title }}
+    </h3>
+
+    {%- if include.pub.authors %}
+    {%- capture me %}<strong>{{ site.title }}</strong>{% endcapture -%}
+    <p class="pub__authors">{{ include.pub.authors | replace: site.title, me }}</p>
+    {%- endif %}
+
+    {%- if include.pub.status or include.pub.venue %}
+    <p class="pub__meta">
+      {%- if include.pub.status %}<span class="pub__status pub__status--{{ include.pub.status }}">{{ include.pub.status }}</span>{% endif -%}
+      {%- if include.pub.status and include.pub.venue %} &middot; {% endif -%}
+      {%- if include.pub.venue %}{{ include.pub.venue }}{% endif -%}
+    </p>
+    {%- endif %}
+
+    {%- if include.pub.summary %}
+    <p class="pub__summary">{{ include.pub.summary }}</p>
+    {%- endif %}
+
+    {%- if include.pub.links %}
+    <ul class="link-row link-row--tight">
+      {%- for l in include.pub.links -%}
+      <li><a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.label }}</a></li>
+      {%- endfor -%}
+    </ul>
+    {%- endif %}
+  </div>
+</li>

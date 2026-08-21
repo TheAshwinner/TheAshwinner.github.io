@@ -1,0 +1,129 @@
+// Blog posts and the /writing/ index.
+
+.post { margin-top: 2.5rem; }
+
+.post__back {
+  margin: 0 0 1.5rem;
+  font-size: 0.9375rem;
+
+  a { color: var(--muted); }
+  a:hover { color: var(--accent); }
+}
+
+.post__header { margin-bottom: 2rem; }
+
+.post__title {
+  font-size: 1.875rem;
+  margin-bottom: 0.4rem;
+}
+
+.post__meta {
+  margin: 0;
+  color: var(--faint);
+  font-size: 0.875rem;
+}
+
+.post__updated { color: var(--faint); }
+
+/* Long-form body copy */
+
+.prose {
+  h2 {
+    font-size: 1.375rem;
+    margin-top: 2.25rem;
+  }
+
+  h3 {
+    font-size: 1.125rem;
+    margin-top: 1.75rem;
+  }
+
+  li { margin-bottom: 0.35em; }
+
+  img {
+    display: block;
+    margin: 1.75rem auto;
+    border-radius: 6px;
+  }
+
+  // MathJax display equations scroll rather than widening the page.
+  mjx-container[display="true"] {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.25rem 0;
+  }
+}
+
+/* Writing index */
+
+.post-list {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+}
+
+.post-list__year { margin-bottom: 2.25rem; }
+
+.post-list__year-heading {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  color: var(--faint);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-list__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-list__item {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0 1rem;
+  padding: 0.4rem 0;
+  align-items: baseline;
+}
+
+.post-list__date {
+  color: var(--faint);
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.post-list__feed {
+  margin-top: 2.5rem;
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 30rem) {
+  .post-list__item {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+}
+
+/* Callout boxes — used by posts via {% include custom-box.html %} */
+
+.custom-box {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 1.75rem 0;
+  overflow: hidden;
+  background-color: var(--surface);
+}
+
+.custom-box-header {
+  background-color: var(--selection);
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+}
+
+.custom-box-body {
+  padding: 1rem 1rem 0.1rem;
+}

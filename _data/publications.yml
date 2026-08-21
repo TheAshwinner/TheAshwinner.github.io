@@ -1,0 +1,35 @@
+# Research entries, newest/most important first.
+#
+#   title      required
+#   authors    optional - your name gets bolded automatically if written as
+#              "Ashwin Sreevatsa"
+#   venue      optional - e.g. "ICML 2026", "arXiv"
+#   status     optional - published | preprint | ongoing
+#   featured   optional - true renders a star
+#   thumbnail  optional - e.g. /assets/images/pubs/foo.png (layout works without one)
+#   summary    optional - one short paragraph
+#   links      optional - list of {label, url}
+
+# TODO: replace these placeholders with your real work.
+
+- title: "Basic Legibility Protocols Improve Trusted Monitoring"
+  authors: "Ashwin Sreevatsa*, Sebastian Prasanna*, Cody Rushing"
+  status: preprint
+  venue: "Arxiv"
+  summary: >
+    One natural approach to monitoring a strong model we don't trust is to have a weaker model that we do trust evaluate all of the untrusted model's actions. However, this weaker model will often fail to understand the stronger, untrusted model's actions. We study "legibility protocols" that force the stronger model to take actions that are easier for the weaker model to understand and oversee. We show that these protocols can improve the effectiveness of the weaker model's monitoring.
+  links:
+    - { label: paper, url: "https://arxiv.org/pdf/2602.10153" }
+    - { label: code, url: "https://github.com/TheAshwinner/legibility-ai-control" }
+    - { label: lesswrong, url: "https://www.lesswrong.com/posts/veqcY4Q6vadE2gv5j/basic-legibility-protocols-improve-trusted-monitoring-1" }
+
+- title: "Prompt Attacks Reveal Superficial Knowledge Removal in Unlearning Methods"
+  authors: "Yeonwoo Jang, Shariqah Hossain, Ashwin Sreevatsa, Diogo Cruz "
+  venue: "COLM 2025 SoLaR Workshop"
+  status: published
+  summary: >
+    We investigate whether popular unlearning methods actually remove knowledge from a model or merely suppress it. We find that simple black-box prompt attacks can often reveal "unlearned" knowledge, indicating that these methods may not be as effective as claimed.
+  links:
+    - { label: paper, url: "https://openreview.net/forum?id=RvwYQ4RycZ" }
+    - { label: code, url: "https://github.com/diogo-cruz/prompt_attacks_paper" }
+    

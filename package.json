@@ -1,0 +1,18 @@
+{
+  "name": "theashwinner.github.io",
+  "version": "1.0.0",
+  "description": "A project for my GitHub Pages site with markdown linting pre-commit hook",
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^15.5.0",
+    "markdownlint-cli": "^0.44.0"
+  },
+  "scripts": {
+    "lint": "markdownlint \"**/*.{md,markdown}\" --ignore node_modules",
+    "lint:fix": "markdownlint \"**/*.{md,markdown}\" --ignore node_modules --fix",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{md,markdown}": "markdownlint --ignore node_modules"
+  }
+}

@@ -2,7 +2,8 @@
 layout: post
 title:  "Highlights from the Aquarium"
 date:   2024-09-17 21:13:17 -0500
-categories: jekyll update
+redirect_from:
+  - /jekyll/update/2024/09/17/highlights-from-the-aquarium.html
 ---
 
 ### Intro

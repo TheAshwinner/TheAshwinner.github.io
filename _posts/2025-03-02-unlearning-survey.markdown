@@ -2,10 +2,11 @@
 layout: post
 title:  "Some Recent Progress in Machine Unlearning for LLMs"
 date:   2025-03-02 14:13:17 -0800
-categories: math
+redirect_from:
+  - /math/2025/03/02/unlearning-survey.html
 ---
 
-Status: Unfinished Draft (it's unlikely I'll be updating this so I'm sharing this in case it is useful for people)
+> _Status: Unfinished Draft (it's unlikely I'll be updating this so I'm sharing this in case it is useful for people)_
 
 ## Motivation
 

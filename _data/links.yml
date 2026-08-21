@@ -1,0 +1,16 @@
+# The row of links under the hero, reused in the footer.
+# `name` is the visible lowercase label. Order here is the order shown.
+# The email entry is special-cased by _includes/link-row.html so the real
+# address only ever appears in the mailto: href, never as page text.
+
+- name: email
+  email: true
+
+- name: linkedin
+  url: https://www.linkedin.com/in/ashwinsreevatsa
+
+- name: github
+  url: https://github.com/TheAshwinner
+
+- name: google scholar
+  url: https://scholar.google.com/citations?user=iGM6gQIAAAAJ

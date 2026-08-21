@@ -1,0 +1,23 @@
+# News items, newest first (this file's order is the display order).
+#
+#   date  required - a real date; rendered as "Apr 2026"
+#   kind  optional - paper | post | program | award | talk
+#   text  required
+#   url   optional - makes the text a link
+
+
+- date: 2026-04-01
+  kind: paper
+  text: "Placeholder: paper accepted to ICML 2026."
+
+- date: 2026-02-01
+  kind: post
+  text: "Placeholder: new blog post."
+  url: /writing/
+
+
+
+- date: 2025-03-02
+  kind: post
+  text: "Wrote up some recent progress in machine unlearning for LLMs."
+  url: /writing/unlearning-survey/
