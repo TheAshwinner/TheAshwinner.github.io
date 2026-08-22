@@ -23,19 +23,35 @@ layout: default
 {%- if site.data.publications and site.data.publications.size > 0 %}
 <section class="section" id="research">
   <h2 class="section__heading">research</h2>
+
+  {%- comment -%}
+  Both notes sit above the list. The Scholar URL is pulled from
+  _data/links.yml so there is one source of truth, and the asterisk note
+  only appears if some author list actually uses one.
+  {%- endcomment -%}
+  {%- assign scholar = site.data.links | where: 'name', 'google scholar' | first -%}
+  {%- assign starred = false -%}
+  {%- for pub in site.data.publications -%}
+    {%- if pub.authors contains '*' -%}{%- assign starred = true -%}{%- endif -%}
+  {%- endfor -%}
+
+  {%- if scholar.url or starred %}
+  <div class="pub-list__intro">
+    {%- if scholar.url %}
+    <p class="pub-list__more">For a full list of publications, see my
+      <a href="{{ scholar.url }}" target="_blank" rel="noopener">Google Scholar</a> page.</p>
+    {%- endif %}
+    {%- if starred %}
+    <p class="pub-list__note">* denotes equal contribution</p>
+    {%- endif %}
+  </div>
+  {%- endif %}
+
   <ul class="pub-list">
     {%- for pub in site.data.publications -%}
       {% include publication.html pub=pub %}
     {%- endfor -%}
   </ul>
-  {%- comment -%}Only show the footnote if some author list actually uses an asterisk.{%- endcomment -%}
-  {%- assign starred = false -%}
-  {%- for pub in site.data.publications -%}
-    {%- if pub.authors contains '*' -%}{%- assign starred = true -%}{%- endif -%}
-  {%- endfor -%}
-  {%- if starred %}
-  <p class="pub-list__note">* denotes equal contribution</p>
-  {%- endif %}
 </section>
 {%- endif %}
 

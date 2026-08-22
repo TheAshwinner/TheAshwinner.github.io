@@ -108,8 +108,18 @@
   color: var(--text);
 }
 
-.pub-list__note {
+.pub-list__intro {
+  margin: 0 0 1.75rem;
+}
+
+.pub-list__more {
   margin: 0;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+.pub-list__note {
+  margin: 0.3rem 0 0;
   font-size: 0.8125rem;
   color: var(--faint);
 }
