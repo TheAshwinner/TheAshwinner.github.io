@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Can Base Models be Effective Monitors for AI Systems?"
+author: "Ashwin Sreevatsa"
+cite: true
 date:  2026-07-13 14:13:17 -0800
 last_modified_at: 2026-07-20 14:13:17 -0800
 ---
@@ -161,10 +163,10 @@ Takeaways
   - More monitor capability evals (instruction following?)
 - Optimizing midtraining
   - Different midtraining mixtures:
-  - For example, we might consider how including additional “aligned” midtraining data helps the monitor’s alignment (see [12](#ref12))
-  - More mixture combinations of our existing midtraining datasets
+    - For example, we might consider how including additional “aligned” midtraining data helps the monitor’s alignment (see [12](#ref12))
+    - More mixture combinations of our existing midtraining datasets
   - Larger midtraining datasets
-  - In particular, it would be useful to compare FLOPs/data split between CPT and task-specific SFT
+    - In particular, it would be useful to compare FLOPs/data split between CPT and task-specific SFT
 - How do monitor ensembles with base model monitors actually work in practice?
 - More ablations
   - How well do the monitors perform if we use the full trajectory instead of taking subtrajectories?

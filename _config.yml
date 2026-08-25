@@ -4,6 +4,9 @@ tagline: AI safety researcher
 description: >-
   Ashwin Sreevatsa — AI safety and alignment research.
 url: "https://theashwinner.github.io"
+# `jekyll serve` rewrites `url` to http://localhost:4000 while previewing.
+# This one is never overridden, so citations always show the real link.
+canonical_url: "https://theashwinner.github.io"
 baseurl: ""
 
 # The visible label is `email_label`; the real address is used only in the

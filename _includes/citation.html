@@ -1,0 +1,75 @@
+{%- comment -%}
+  Citation block for research posts. Opt in per-post with `cite: true`.
+
+  Everything is derived from front matter, so the citation can never drift out
+  of sync with the post's title, author, or dates. Optional front matter:
+
+    cite_key: sreevatsa2026base   # override the generated BibTeX key
+
+  Braces are emitted via the `ob`/`cb` variables: a literal doubled brace is
+  Liquid's own output delimiter, so BibTeX braces cannot be typed directly.
+{%- endcomment -%}
+
+{%- assign ob = "{" -%}
+{%- assign cb = "}" -%}
+
+{%- comment -%}
+  `jekyll serve` rewrites site.url to http://localhost:4000 in development
+  (serve.rb: `config["url"] = default_url(config) if Jekyll.env == "development"`),
+  which would put a localhost link in the citation while previewing. Prefer
+  site.canonical_url, which serve never touches, and fall back to site.url.
+{%- endcomment -%}
+{%- assign site_root = site.canonical_url | default: site.url -%}
+{%- assign cite_url = site_root | append: site.baseurl | append: page.url -%}
+
+{%- assign author_full = page.author | default: site.title -%}
+{%- assign parts = author_full | split: " " -%}
+{%- assign surname = parts | last -%}
+{%- assign given_count = parts.size | minus: 1 -%}
+{%- if given_count > 0 -%}
+  {%- assign given = parts | slice: 0, given_count | join: " " -%}
+  {%- assign bibtex_author = surname | append: ", " | append: given -%}
+{%- else -%}
+  {%- assign bibtex_author = surname -%}
+{%- endif -%}
+
+{%- assign year = page.date | date: "%Y" -%}
+{%- assign month = page.date | date: "%b" | downcase -%}
+
+{%- comment -%}
+  BibTeX key: surname + year + first title word that carries meaning.
+{%- endcomment -%}
+{%- if page.cite_key -%}
+  {%- assign cite_key = page.cite_key -%}
+{%- else -%}
+  {%- assign stopwords = "a,an,the,can,could,should,would,be,being,is,are,was,were,do,does,did,how,what,why,when,where,on,in,of,for,to,and,or,but,with,as,at,from,by,into,about" | split: "," -%}
+  {%- assign title_clean = page.title | downcase | replace: "?", "" | replace: ":", "" | replace: ";", "" | replace: ",", "" | replace: ".", "" | replace: "!", "" | replace: '"', "" | replace: "'", "" | replace: "(", "" | replace: ")", "" -%}
+  {%- assign title_words = title_clean | split: " " -%}
+  {%- assign keyword = "" -%}
+  {%- for w in title_words -%}
+    {%- unless stopwords contains w -%}
+      {%- assign keyword = w -%}
+      {%- break -%}
+    {%- endunless -%}
+  {%- endfor -%}
+  {%- if keyword == "" -%}{%- assign keyword = title_words | first -%}{%- endif -%}
+  {%- assign cite_key = surname | downcase | append: year | append: keyword -%}
+{%- endif -%}
+
+<section class="cite" aria-labelledby="cite-heading">
+  <h2 class="cite__heading" id="cite-heading">Cite this post</h2>
+
+  <div class="cite__block">
+<pre class="cite__bibtex"><code id="cite-bibtex">@misc{{ ob }}{{ cite_key }},
+  title        = {{ ob }}{{ ob }}{{ page.title | escape }}{{ cb }}{{ cb }},
+  author       = {{ ob }}{{ bibtex_author | escape }}{{ cb }},
+  year         = {{ ob }}{{ year }}{{ cb }},
+  month        = {{ month }},
+  howpublished = {{ ob }}\url{{ ob }}{{ cite_url }}{{ cb }}{{ cb }},
+  note         = {{ ob }}Blog post{% if page.last_modified_at %}. Last updated {{ page.last_modified_at | date: "%B %-d, %Y" }}{% endif %}{{ cb }}
+{{ cb }}</code></pre>
+    <button class="cite__copy" type="button" data-copy-target="cite-bibtex" aria-label="Copy BibTeX entry">Copy</button>
+  </div>
+
+  <p class="cite__status" role="status" aria-live="polite"></p>
+</section>

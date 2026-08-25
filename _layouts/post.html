@@ -26,6 +26,10 @@ layout: default
     {{ content }}
   </div>
 
+  {%- if page.cite %}
+  {%- include citation.html %}
+  {%- endif %}
+
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
 
@@ -48,6 +52,62 @@ layout: default
       // The '#' is decoration; give assistive tech something meaningful.
       link.setAttribute('aria-label', 'Link to section: ' + heading.textContent.trim());
       heading.appendChild(link);
+    });
+  })();
+
+  // Copy buttons in the citation block. Each button names the element whose
+  // text it copies, so the markup stays the single source of truth.
+  (function () {
+    var buttons = document.querySelectorAll('.cite__copy');
+    if (!buttons.length) return;
+
+    var status = document.querySelector('.cite__status');
+
+    function announce(message) {
+      if (status) status.textContent = message;
+    }
+
+    // navigator.clipboard needs a secure context; fall back to a scratch
+    // textarea so this still works over plain http (e.g. `jekyll serve`).
+    function copy(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      }
+      return new Promise(function (resolve, reject) {
+        var scratch = document.createElement('textarea');
+        scratch.value = text;
+        scratch.setAttribute('readonly', '');
+        scratch.style.position = 'fixed';
+        scratch.style.opacity = '0';
+        document.body.appendChild(scratch);
+        scratch.select();
+        try {
+          document.execCommand('copy') ? resolve() : reject();
+        } catch (e) {
+          reject(e);
+        } finally {
+          document.body.removeChild(scratch);
+        }
+      });
+    }
+
+    Array.prototype.forEach.call(buttons, function (button) {
+      button.addEventListener('click', function () {
+        var target = document.getElementById(button.getAttribute('data-copy-target'));
+        if (!target) return;
+
+        copy(target.textContent.trim()).then(function () {
+          button.textContent = 'Copied';
+          button.classList.add('is-copied');
+          announce('Citation copied to clipboard.');
+          setTimeout(function () {
+            button.textContent = 'Copy';
+            button.classList.remove('is-copied');
+          }, 2000);
+        }, function () {
+          announce('Copy failed \u2014 select the text and copy manually.');
+        });
+      });
     });
   })();
 </script>
