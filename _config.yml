@@ -21,6 +21,11 @@ show_news: false
 # Posts live under /writing/
 permalink: /writing/:title/
 
+# Markdown. `toc_levels` caps how deep a `{:toc}` table of contents goes;
+# posts without a `{:toc}` marker are unaffected.
+kramdown:
+  toc_levels: 2..3
+
 # Build settings
 plugins:
   - jekyll-feed
