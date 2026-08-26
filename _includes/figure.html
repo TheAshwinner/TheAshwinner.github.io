@@ -1,0 +1,30 @@
+{%- comment -%}
+  A figure with a caption.
+
+    {% include figure.html
+       src="/assets/images/base_model_monitoring/foo.svg"
+       alt="What the chart shows, for screen readers"
+       caption="**Figure 1:** ..."
+       wide=true %}
+
+  `caption` is run through markdownify, so **bold** and [links](...) work --
+  unlike a hand-written <figure>, where kramdown leaves markdown unparsed.
+
+  `wide` lets multi-panel charts break out of the 720px prose column; without
+  it a 3-panel figure is squeezed to ~57% scale and its axis labels turn to
+  mush.
+
+  To make a figure linkable, put a `<span id="fig1"></span>` anchor in the
+  markdown just above the include, the same way the reference list does. The
+  anchor has to live in the markdown rather than here, or markdownlint's MD051
+  cannot see it and reports every [Figure 1](#fig1) link as a broken fragment.
+{%- endcomment -%}
+
+<figure class="figure{% if include.wide %} figure--wide{% endif %}">
+  <a class="figure__media" href="{{ include.src | relative_url }}" target="_blank" rel="noopener" aria-label="Open full size: {{ include.alt | escape }}">
+    <img src="{{ include.src | relative_url }}" alt="{{ include.alt | escape }}" loading="lazy">
+  </a>
+  {%- if include.caption %}
+  <figcaption class="figure__caption">{{ include.caption | markdownify }}</figcaption>
+  {%- endif %}
+</figure>

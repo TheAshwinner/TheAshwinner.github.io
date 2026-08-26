@@ -131,6 +131,65 @@
   }
 }
 
+/* Figures -- rendered by _includes/figure.html.
+
+   The matplotlib SVGs carry an opaque white background and black axis text,
+   so on the dark theme they would otherwise read as a bare white slab. The
+   card treatment (white plate, padding, border) makes that white deliberate
+   in both themes without needing a second dark export of every chart. */
+
+.figure {
+  margin: 2rem 0;
+}
+
+.figure__media {
+  display: block;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: #ffffff;
+
+  // The wrapper is a link to the full-size file; suppress the link underline.
+  &,
+  &:hover { border-bottom: 1px solid var(--border); }
+
+  &:hover { border-color: var(--accent); }
+
+  img {
+    display: block;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+}
+
+.figure__caption {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+
+  p { margin: 0; }
+  p + p { margin-top: 0.5em; }
+}
+
+/* Multi-panel charts break out of the prose column. Capped against the
+   viewport so the page itself never scrolls sideways. */
+
+.figure--wide {
+  width: min(1080px, 94vw);
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 48rem) {
+  .figure--wide {
+    width: 100%;
+    margin-left: 0;
+    transform: none;
+  }
+}
+
 /* Citation block -- rendered by _includes/citation.html on posts with
    `cite: true`. Sits below the post body, above the writing-index link. */
 
