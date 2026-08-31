@@ -4,6 +4,8 @@
 #   authors    optional - your name gets bolded automatically if written as
 #              "Ashwin Sreevatsa"
 #   venue      optional - e.g. "ICML 2026", "arXiv"
+#   date       optional - a real YAML date (use the 1st if only the month is
+#              known, e.g. 2026-02-01); rendered next to the venue as "Feb 2026"
 #   status     optional - published | preprint | ongoing
 #   featured   optional - true renders a star
 #   thumbnail  optional - e.g. /assets/images/pubs/foo.png (layout works without one)
@@ -12,10 +14,20 @@
 
 # TODO: replace these placeholders with your real work.
 
+- title: "Can Base Models be Effective Monitors for AI Systems?"
+  authors: "Ashwin Sreevatsa"
+  venue: "Research note"
+  date: 2026-07-13
+  summary: >
+    (Preliminary investigation) We explore whether base models (i.e. models without post-training) can effectively monitor the behavior of AI agents. We find that such monitors trained via a midtraining + SFT pipeline can often match the performance of post-trained models. These base models show minimal degradation in general performance and outperform post-trained models on alignment evals. 
+  links:
+    - { label: blog post, url: "/writing/base-model-monitoring-update/" }
+
 - title: "Basic Legibility Protocols Improve Trusted Monitoring"
   authors: "Ashwin Sreevatsa*, Sebastian Prasanna*, Cody Rushing"
   status: preprint
   venue: "Arxiv"
+  date: 2026-02-09
   summary: >
     One natural approach to monitoring a strong model we don't trust is to have a weaker model that we do trust evaluate all of the untrusted model's actions. However, this weaker model will often fail to understand the stronger, untrusted model's actions. We study "legibility protocols" that force the stronger model to take actions that are easier for the weaker model to understand and oversee. We show that these protocols can improve the effectiveness of the weaker model's monitoring.
   links:
@@ -27,6 +39,7 @@
   authors: "Yeonwoo Jang, Shariqah Hossain, Ashwin Sreevatsa, Diogo Cruz "
   venue: "COLM 2025 SoLaR Workshop"
   status: published
+  date: 2025-06-11
   summary: >
     We investigate whether popular unlearning methods actually remove knowledge from a model or merely suppress it. We find that simple black-box prompt attacks can often reveal "unlearned" knowledge, indicating that these methods may not be as effective as claimed.
   links:

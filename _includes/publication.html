@@ -16,12 +16,19 @@
     <p class="pub__authors">{{ include.pub.authors | replace: site.title, me }}</p>
     {%- endif %}
 
-    {%- if include.pub.status or include.pub.venue %}
-    <p class="pub__meta">
-      {%- if include.pub.status %}<span class="pub__status pub__status--{{ include.pub.status }}">{{ include.pub.status }}</span>{% endif -%}
-      {%- if include.pub.status and include.pub.venue %} &middot; {% endif -%}
-      {%- if include.pub.venue %}{{ include.pub.venue }}{% endif -%}
-    </p>
+    {%- comment -%}
+    The meta line is status / venue / date, any of which may be absent. Each
+    present part is appended with a `|~|` delimiter and the pieces are then
+    joined, so a missing part never leaves a stray separator behind and a new
+    part can be added without touching the ones around it.
+    {%- endcomment -%}
+    {%- capture meta_raw -%}
+    {%- if include.pub.status %}<span class="pub__status pub__status--{{ include.pub.status }}">{{ include.pub.status }}</span>|~|{% endif %}{% if include.pub.venue %}{{ include.pub.venue }}|~|{% endif %}{% if include.pub.date %}<time datetime="{{ include.pub.date | date_to_xmlschema }}">{{ include.pub.date | date: "%b %Y" }}</time>|~|{% endif %}
+    {%- endcapture -%}
+    {%- assign meta_parts = meta_raw | split: "|~|" -%}
+
+    {%- if meta_parts.size > 0 %}
+    <p class="pub__meta">{{ meta_parts | join: " &middot; " }}</p>
     {%- endif %}
 
     {%- if include.pub.summary %}
