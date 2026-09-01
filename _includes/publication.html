@@ -1,5 +1,20 @@
 {%- comment -%} Renders one entry from _data/publications.yml {%- endcomment -%}
-<li class="pub{% if include.pub.thumbnail %} pub--with-thumb{% endif %}">
+
+{%- comment -%}
+The filter groups this entry belongs to, consumed by the toggle above the
+list. "paper" is anything with a venue-bearing status; blog posts and notes
+carry no status and so fall outside it. Adding a group here is all a new
+filter button needs - the script matches on this attribute generically.
+{%- endcomment -%}
+{%- assign groups = "" -%}
+{%- if include.pub.status == "preprint" or include.pub.status == "published" -%}
+  {%- assign groups = groups | append: " paper" -%}
+{%- endif -%}
+{%- if include.pub.featured -%}
+  {%- assign groups = groups | append: " featured" -%}
+{%- endif -%}
+
+<li class="pub{% if include.pub.thumbnail %} pub--with-thumb{% endif %}" data-groups="{{ groups | strip }}">
   {%- if include.pub.thumbnail %}
   <div class="pub__thumb">
     <img src="{{ include.pub.thumbnail | relative_url }}" alt="" loading="lazy">

@@ -47,11 +47,61 @@ layout: default
   </div>
   {%- endif %}
 
+  {%- comment -%}
+  Filter buttons. `data-default` is the group shown on load; `data-filter`
+  on a button is matched against `data-groups` on each entry, with "all"
+  reserved to mean no filtering. A new filter is a button here plus the
+  matching group in publication.html - the script needs no changes.
+  {%- endcomment -%}
+  <div class="pub-filter" role="group" aria-label="Filter research" data-default="paper">
+    <button type="button" class="pub-filter__btn" data-filter="paper" aria-pressed="true">papers</button>
+    <button type="button" class="pub-filter__btn" data-filter="all" aria-pressed="false">all work</button>
+  </div>
+
   <ul class="pub-list">
     {%- for pub in site.data.publications -%}
       {% include publication.html pub=pub %}
     {%- endfor -%}
   </ul>
+
+  {%- comment -%}
+  The list ships fully expanded so it reads correctly with no JS and to
+  crawlers. This runs during parse, before first paint, so applying the
+  default filter never shows as a flash of entries that then disappear.
+  {%- endcomment -%}
+  <noscript>
+    <style>.pub-filter { display: none; }</style>
+  </noscript>
+  <script>
+    (function () {
+      var bar = document.querySelector('.pub-filter');
+      var list = document.querySelector('.pub-list');
+      if (!bar || !list) return;
+
+      var buttons = bar.querySelectorAll('.pub-filter__btn');
+      var items = list.querySelectorAll('.pub');
+
+      function apply(name) {
+        for (var i = 0; i < items.length; i++) {
+          var groups = (items[i].getAttribute('data-groups') || '').split(' ');
+          items[i].hidden = name !== 'all' && groups.indexOf(name) === -1;
+        }
+        for (var j = 0; j < buttons.length; j++) {
+          var on = buttons[j].getAttribute('data-filter') === name;
+          buttons[j].classList.toggle('is-active', on);
+          buttons[j].setAttribute('aria-pressed', String(on));
+        }
+      }
+
+      for (var k = 0; k < buttons.length; k++) {
+        buttons[k].addEventListener('click', function () {
+          apply(this.getAttribute('data-filter'));
+        });
+      }
+
+      apply(bar.getAttribute('data-default') || 'all');
+    })();
+  </script>
 </section>
 {%- endif %}
 
