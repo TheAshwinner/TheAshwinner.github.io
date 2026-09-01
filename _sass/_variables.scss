@@ -20,6 +20,7 @@
   --accent: #82b3dd;
   --accent-hover: #a9cdec;
   --selection: #2a3f52;
+  --lift-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
 }
 
 :root {
@@ -49,6 +50,7 @@
   --accent: #2d5f8b;
   --accent-hover: #1c3f60;
   --selection: #d8e6f2;
+  --lift-shadow: 0 6px 20px rgba(28, 28, 28, 0.07);
 }
 
 @media (prefers-color-scheme: dark) {

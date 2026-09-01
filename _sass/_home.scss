@@ -53,9 +53,47 @@
 }
 
 .pub {
-  margin-bottom: 2.25rem;
+  // Padded so the hover surface has room around the text, then pulled back
+  // out by the same amount so the text still lines up with everything else
+  // on the page. The bleed stays inside --gutter (1.5rem), so no overflow
+  // on narrow screens.
+  padding: 1rem 1.15rem;
+  margin: 0 -1.15rem 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: background-color 0.18s ease, border-color 0.18s ease,
+              box-shadow 0.18s ease, transform 0.18s ease;
 
   &:last-child { margin-bottom: 0; }
+}
+
+// `hover: hover` keeps touch devices out of it: a tap would otherwise leave
+// an entry stuck in the raised state with no way to un-hover it. :focus-within
+// gives keyboard users the same affordance when they tab into an entry's links.
+@media (hover: hover) {
+  .pub:hover,
+  .pub:focus-within {
+    background: var(--surface);
+    border-color: var(--border);
+    box-shadow: var(--lift-shadow);
+    transform: translateY(-2px);
+  }
+}
+
+.pub:focus-within {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pub {
+    transition: none;
+  }
+
+  .pub:hover,
+  .pub:focus-within {
+    transform: none;
+  }
 }
 
 .pub--with-thumb {
