@@ -114,6 +114,38 @@
   margin-top: 0.6rem;
 }
 
+// Icon-only variant: hero row only. The publication links share .link-row
+// and keep the plain text-with-middot treatment, so these rules are scoped
+// to this modifier rather than added to .link-row itself.
+.link-row--icons {
+  align-items: center;
+  gap: 0.4rem 1.1rem;
+
+  // The labels are visually hidden here, so a middot between icons would be
+  // separating things that already read as separate.
+  li + li::before { content: none; }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    // Grows the tap target well past the glyph for touch and imprecise mice.
+    // The matching negative margin keeps the row's visual spacing unchanged.
+    padding: 0.45rem;
+    margin: -0.45rem;
+  }
+
+  .icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  flex: none;          // never let flexbox squash the glyph
+}
+
 /* Footer */
 
 .site-footer {

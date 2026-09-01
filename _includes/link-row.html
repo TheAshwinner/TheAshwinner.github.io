@@ -1,16 +1,21 @@
 {%- comment -%}
-Renders site.data.links as a row of lowercase text links.
+Renders site.data.links as a row of icons from icon.html. The label is kept
+in the DOM but visually hidden, so each link still has an accessible name -
+the icon itself stays aria-hidden. `title` gives sighted readers a tooltip,
+which matters most for the Scholar mark. Because the anchor has text content,
+that text wins the accessible name and the title is not announced twice.
 An entry with `email: true` becomes a mailto: built from site.email_address,
 so the address is never rendered as page text.
 {%- endcomment -%}
-<ul class="link-row">
+<ul class="link-row link-row--icons">
   {%- for link in site.data.links -%}
     {%- if link.email -%}
       {%- if site.email_address -%}
-      <li><a href="mailto:{{ site.email_address }}">{{ site.email_label | default: 'email' }}</a></li>
+      <li>{%- assign email_label = site.email_label | default: 'email' -%}
+      <a href="mailto:{{ site.email_address }}" title="{{ email_label }}">{% include icon.html name='email' %}<span class="visually-hidden">{{ email_label }}</span></a></li>
       {%- endif -%}
     {%- elsif link.url -%}
-      <li><a href="{{ link.url }}"{% unless link.url contains site.url or link.url == '/' %} target="_blank" rel="noopener"{% endunless %}>{{ link.name }}</a></li>
+      <li><a href="{{ link.url }}"{% unless link.url contains site.url or link.url == '/' %} target="_blank" rel="noopener"{% endunless %} title="{{ link.name }}">{% include icon.html name=link.name %}<span class="visually-hidden">{{ link.name }}</span></a></li>
     {%- endif -%}
   {%- endfor -%}
 </ul>
