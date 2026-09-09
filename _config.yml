@@ -1,8 +1,8 @@
 # Site settings
 title: Ashwin Sreevatsa
-tagline: AI safety researcher
+tagline: AI security researcher
 description: >-
-  Ashwin Sreevatsa — AI safety and alignment research.
+  Ashwin Sreevatsa — AI security and alignment research.
 url: "https://theashwinner.github.io"
 # `jekyll serve` rewrites `url` to http://localhost:4000 while previewing.
 # This one is never overridden, so citations always show the real link.
