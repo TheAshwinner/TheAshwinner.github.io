@@ -21,6 +21,12 @@
   {%- seo -%}
   {%- feed_meta -%}
 
+  {%- comment -%}
+  Browser tab icon. The mark is a dark tile, so it holds up against both a
+  light and a dark tab strip without needing a per-theme variant.
+  {%- endcomment -%}
+  <link rel="icon" href="{{ '/assets/images/favicon.svg' | relative_url }}" type="image/svg+xml">
+
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
   <!-- MathJax. Inline $...$ is enabled: posts already use it. -->
