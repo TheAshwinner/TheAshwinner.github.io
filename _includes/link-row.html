@@ -6,9 +6,11 @@ which matters most for the Scholar mark. Because the anchor has text content,
 that text wins the accessible name and the title is not announced twice.
 An entry with `email: true` becomes a mailto: built from site.email_address,
 so the address is never rendered as page text.
+Pass `links=` to render a different list, e.g. a page's own front matter.
 {%- endcomment -%}
+{%- assign links = include.links | default: site.data.links -%}
 <ul class="link-row link-row--icons">
-  {%- for link in site.data.links -%}
+  {%- for link in links -%}
     {%- if link.email -%}
       {%- if site.email_address -%}
       <li>{%- assign email_label = site.email_label | default: 'email' -%}

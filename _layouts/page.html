@@ -6,6 +6,7 @@ layout: default
   <header class="page__header">
     <h1 class="page__title">{{ page.title }}</h1>
     {%- if page.subtitle %}<p class="page__subtitle">{{ page.subtitle }}</p>{% endif %}
+    {%- if page.links %}{% include link-row.html links=page.links %}{% endif %}
   </header>
   {%- endif %}
   <div class="page__content prose">

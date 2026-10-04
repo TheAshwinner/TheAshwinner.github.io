@@ -3,6 +3,9 @@ layout: page
 title: writing
 subtitle: Notes, book highlights, anything random on my mind
 permalink: /writing/
+links:
+  - name: letterboxd
+    url: https://letterboxd.com/theashwinner/
 ---
 
 {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
