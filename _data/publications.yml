@@ -31,7 +31,7 @@
   summary: >
     One natural approach to monitoring a strong model we don't trust is to have a weaker model that we do trust evaluate all of the untrusted model's actions. However, this weaker model will often fail to understand the stronger, untrusted model's actions. We study "legibility protocols" that force the stronger model to take actions that are easier for the weaker model to understand and oversee. We show that these protocols can improve the effectiveness of the weaker model's monitoring.
   links:
-    - { label: paper, url: "https://arxiv.org/pdf/2602.10153" }
+    - { label: paper, url: "https://arxiv.org/abs/2602.10153" }
     - { label: code, url: "https://github.com/TheAshwinner/legibility-ai-control" }
     - { label: lesswrong, url: "https://www.lesswrong.com/posts/veqcY4Q6vadE2gv5j/basic-legibility-protocols-improve-trusted-monitoring-1" }
 
