@@ -304,6 +304,19 @@
   white-space: nowrap;
 }
 
+// .post-list__item sets `display: grid`, which beats the UA's [hidden] rule,
+// so the topic filter on the writing page restates it with author weight.
+.post-list__item[hidden],
+.post-list__year[hidden] { display: none; }
+
+// Sits right under the filter bar, so it takes the bar's place in the rhythm.
+.filter-bar + .post-list { margin-top: 1.75rem; }
+
+.post-list__empty {
+  margin-top: 1.75rem;
+  color: var(--muted);
+}
+
 .post-list__feed {
   margin-top: 2.5rem;
   font-size: 0.9375rem;

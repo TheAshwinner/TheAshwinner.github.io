@@ -2,6 +2,7 @@
 layout: post
 title:  "Some Recent Progress in Machine Unlearning for LLMs"
 date:   2025-03-02 14:13:17 -0800
+tags: [ai]
 redirect_from:
   - /math/2025/03/02/unlearning-survey.html
 ---

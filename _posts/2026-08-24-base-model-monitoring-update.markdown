@@ -4,6 +4,7 @@ title:  "Can Base Models be Effective Monitors for AI Systems?"
 author: "Ashwin Sreevatsa"
 cite: true
 date:  2026-07-13 14:13:17 -0800
+tags: [ai]
 last_modified_at: 2026-08-25 14:13:17 -0800
 ---
 _This is a quick research update to summarize the recent progress in our current Base Model Monitoring project. This project is currently on pause. These notes may be terse in places: feel free to leave comments and questions at this [link](https://docs.google.com/document/d/1haZTGiT3bMRtL_mAiOaXvbHaNPdeBR_EuYqM8ZS1JtI/edit?tab=t.0) if anything is unclear._

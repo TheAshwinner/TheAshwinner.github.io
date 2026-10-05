@@ -146,6 +146,47 @@
   flex: none;          // never let flexbox squash the glyph
 }
 
+/* Filter bar — research list on home, post list on writing */
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 1.25rem;
+}
+
+.filter-bar__btn {
+  font: inherit;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--faint);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease,
+              border-color 0.15s ease;
+
+  &:hover { color: var(--text); }
+
+  &.is-active {
+    color: var(--text);
+    background: var(--surface);
+    border-color: var(--border);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filter-bar__btn { transition: none; }
+}
+
 /* Footer */
 
 .site-footer {
